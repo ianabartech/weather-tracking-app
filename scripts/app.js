@@ -6,15 +6,11 @@ const icon = document.querySelector('.icon img');
 const forecast = new Forecast();
 
 const updateUI = (data) => {
-    //creating local variable for convenient
-
-    console.log(data);
-
-
+    
     //destructure properties
     const {cityFrom, weatherFrom} = data;
 
-    //update details template
+    //update details HTML template
     details.innerHTML = `
         <h5 class="my-3">${cityFrom.EnglishName}</h5>
         <div class="my-3">${weatherFrom.WeatherText}</div>
@@ -24,7 +20,7 @@ const updateUI = (data) => {
         </div>
     `;
 
-    //update the nigh/day & icon images
+    //update the night/day & icon images
     const iconSrc = `img/icons/${weatherFrom.WeatherIcon}.svg`;
     icon.setAttribute('src', iconSrc);
 
@@ -58,6 +54,7 @@ cityForm.addEventListener('submit', e => {
 
 });
 
+//put the data into local storage
 if(localStorage.getItem('city')){
     forecast.updateCity(localStorage.getItem('city'))
         .then(data => {
