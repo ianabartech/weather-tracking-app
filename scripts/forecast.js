@@ -9,7 +9,8 @@ class Forecast{
 
     }
 
-    //This execute the two asynchronous function; getCity and getWeather.
+    //This execute the two asynchronous function; getCity and getWeather to get
+    //the actual weather of the selected city.
     async updateCity(userInputCity){
         const cityFrom = await this.getCity(userInputCity);
         const weatherFrom = await this.getWeather(cityFrom.Key);
@@ -17,7 +18,7 @@ class Forecast{
         return {cityFrom, weatherFrom};
     };
 
-    //This get the data from api, fetch it and get the response.
+    //This get the city data from the api, fetch it and get the response.
     async getCity(city){
         const query = `?apikey=${this.key}&q=${city}`;
         const response = await fetch(this.cityURI + query);
@@ -26,6 +27,7 @@ class Forecast{
         return data[0];
     };
 
+    //This get the weather data from the api, fetch it and get the response.
     async getWeather(id){
         const query = `${id}?apikey=${this.key}`;
         const response = await fetch(this.weatherURI + query);
